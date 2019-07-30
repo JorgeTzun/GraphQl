@@ -1,0 +1,40 @@
+scalar DateTime
+
+type Query {
+    saludo ( name: String!): String!
+    getEmpresa (name: String): Empresa
+    getAllEmpresa (name: String): [Empresa]
+    getFilterEmpresa (name: String): [Empresa]
+}
+
+type Mutation {
+    createEmpresa (data: EmpresaInput ): Empresa
+    createUser (data: UserInput ): User
+}
+
+type Empresa {
+    id: ID,
+    name: String!, 
+    address: String!, 
+    createdAt: DateTime,
+    user: User!
+}
+
+type User {
+    id:ID,
+    name:String!,
+    email:String!
+}
+
+input EmpresaInput {
+    name: String!, 
+    address: String!, 
+    createdAt: String,
+    user: String!
+}
+
+input UserInput {
+    name:String!,
+    email:String!,
+    password:String!
+}
