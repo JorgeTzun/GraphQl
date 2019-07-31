@@ -1,8 +1,9 @@
+directive @auth on FIELD_DEFINITION_ FIED
 scalar DateTime
 
 type Query {
     saludo ( name: String!): String!
-    getEmpresa (id: String): Empresa
+    getEmpresa (id: String): Empresa @auth
     getAllEmpresa (name: String): [Empresa]
     getFilterEmpresa (name: String): [Empresa]
 }
