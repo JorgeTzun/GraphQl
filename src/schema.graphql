@@ -2,7 +2,7 @@ scalar DateTime
 
 type Query {
     saludo ( name: String!): String!
-    getEmpresa (name: String): Empresa
+    getEmpresa (id: String): Empresa
     getAllEmpresa (name: String): [Empresa]
     getFilterEmpresa (name: String): [Empresa]
 }
@@ -10,6 +10,7 @@ type Query {
 type Mutation {
     createEmpresa (data: EmpresaInput ): Empresa
     createUser (data: UserInput ): User
+    login (data: LoginInput!): Token
 }
 
 type Empresa {
@@ -23,9 +24,14 @@ type Empresa {
 type User {
     id:ID,
     name:String!,
-    email:String!
+    email:String!,
+    password:String
 }
 
+type Token {
+    token:String!,
+    message:String
+}
 input EmpresaInput {
     name: String!, 
     address: String!, 
@@ -35,6 +41,11 @@ input EmpresaInput {
 
 input UserInput {
     name:String!,
+    email:String!,
+    password:String!
+}
+
+input LoginInput{
     email:String!,
     password:String!
 }

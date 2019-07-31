@@ -4,7 +4,7 @@ const {importSchema} = require('graphql-import');
 const mongoose = require('../config/conexion');
 const typeDefs  =  importSchema('./src/schema.graphql');
 const {getAllEmpresa, getFilterEmpresa, getEmpresa} =  require('../src/resolvers/Querys');
-const {createEmpresa, createUser} =  require('../src/resolvers/Mutations');
+const {createEmpresa, createUser, login} =  require('../src/resolvers/Mutations');
 
 
  const resolvers = {
@@ -15,7 +15,8 @@ const {createEmpresa, createUser} =  require('../src/resolvers/Mutations');
      },
      Mutation:{
         createEmpresa,
-        createUser
+        createUser,
+        login
      }
 }
 
