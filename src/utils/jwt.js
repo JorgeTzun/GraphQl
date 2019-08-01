@@ -12,52 +12,19 @@ const createToken = (user) => {
 }
 
 const verifyToken = (req) => {
-    console.log('verifica token');
     console.log(req);
-    let Authorization = req.get['Authorization'];
+    let Authorization = req.headers.authorization;
 
     if (!Authorization) {
-        res.status(401).send({ error: 'En necesario el token de autentificación' });
+        return req;
     } else {
-        const formToken = Authorization.replace('Bearer');
+        const formToken = Authorization.replace('JWT ',"");
         const payload=  jwt.verify(formToken, process.env.SECRET);
         if(!payload) return req;
         const user =  User.findOne({_id : payload.id});
-
+        if(!user) return req;
         return {... req,user}
     }
-    return lTokenValido;
 }
 
 module.exports = { createToken, verifyToken };
-
-/*const generaToken = (tokenData) => {
-
-    return jwt.sign(tokenData, process.env.SECRET_KEY, {
-        expiresIn: 60 * 60 * 24  // Tiempo  en que expira el token : 1hr
-    });
-};
-
-const verificaToken = (req, res) => {
-
-    console.log('verifica token');
-    console.log(req);
-    let lTokenValido = true;
-    let cToken = req.headers['authorization'];
-
-    if (!cToken)
-        res.status(401).send({ error: 'En necesario el token de autentificación' });
-
-    cToken = cToken.replace('Bearer');
-
-    jwt.verify(cToken, process.env.SECRET, (err, token) =>{
-         if(err){
-             lTokenValido = false;
-             res.status(401).send({error: "Token inválido"});
-         }
-    });
-
-    return lTokenValido;
-}
-
-module.exports =  generaToken */

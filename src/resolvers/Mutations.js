@@ -1,6 +1,7 @@
 const Empresa = require('../Models/Empresa');
 const User = require('../Models/User');
 const authenticated  =  require('../utils/authenticated');
+const storage  = require('../utils/storage');
 
 const createEmpresa = async (root, args) => {
     let newEmpresa = new Empresa({
@@ -29,8 +30,22 @@ const login  =   async (root, args) => {
     };
 }
 
+const addPhoto  = async(root, args) => {
+    console.log(args);
+
+    if(args.photo){
+        const  {createReadStream } = await args.photo;
+        const stream  =  createReadStream();
+        console.log('Stream ==>' , stream);
+        const url = await storage({stream});
+        console.log(url);;
+    }
+}
+
+
 module.exports = {
     createEmpresa,
     createUser,
-    login
+    login,
+    addPhoto
 }

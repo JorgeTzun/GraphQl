@@ -1,5 +1,6 @@
-directive @auth on FIELD_DEFINITION_ FIED
+directive @auth on FIELD_DEFINITION | FIELD
 scalar DateTime
+scalar Upload
 
 type Query {
     saludo ( name: String!): String!
@@ -12,6 +13,7 @@ type Mutation {
     createEmpresa (data: EmpresaInput ): Empresa
     createUser (data: UserInput ): User
     login (data: LoginInput!): Token
+    addPhoto(photo: Upload): String
 }
 
 type Empresa {
