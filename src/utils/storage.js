@@ -16,6 +16,7 @@ const storage =  ({stream}) => {
         });
         stream.pipe(buffer);
     });
+    
 }
 
 module.exports = storage;
